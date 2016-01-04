@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000" >
+
+    <cropper.CropImageView
+        android:id="@+id/CropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/fake_icon_film" />
+
+    <TextView
+        android:id="@+id/tv_canle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rl_image"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="15dp"
+        android:padding="10dip"
+        android:text="取消"
+        android:textColor="#0acfc0"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_canle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:padding="10dip"
+        android:text="确认"
+        android:textColor="#0acfc0"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@mipmap/camera_button_scale" >
+
+        <TextView
+            android:id="@+id/tv_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:padding="5dip"
+            android:text="1:1"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
