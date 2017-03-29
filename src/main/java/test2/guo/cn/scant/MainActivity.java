@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.zxing.decode.DecodeUtils;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
 import com.google.zxing.DecodeHintType;
@@ -126,10 +127,18 @@ public class MainActivity extends AppCompatActivity {
                                         m.obj = result.getText();
                                         mHandler.sendMessage(m);
                                     } else {
-                                        Message m = mHandler.obtainMessage();
-                                        m.what = PARSE_BARCODE_FAIL;
-                                        m.obj = "未识别的二维码!";
-                                        mHandler.sendMessage(m);
+                                        String result2 = scanningImage2(crop_photo_path);
+                                        if (result != null) {
+                                            Message m = mHandler.obtainMessage();
+                                            m.what = PARSE_BARCODE_SUC;
+                                            m.obj = result2;
+                                            mHandler.sendMessage(m);
+                                        }else{
+                                            Message m = mHandler.obtainMessage();
+                                            m.what = PARSE_BARCODE_FAIL;
+                                            m.obj = "未识别的二维码!";
+                                            mHandler.sendMessage(m);
+                                        }
                                     }
                                 }
                             }).start();
@@ -207,6 +216,26 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+    public String scanningImage2(String path) {
+        if(TextUtils.isEmpty(path)){
+            return null;
+        }
+        Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();
+        hints.put(DecodeHintType.CHARACTER_SET, "UTF8");
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        //		scanBitmap = BitmapFactory.decodeFile(path, options);
+        options.inJustDecodeBounds = false;
+        int sampleSize = (int) (options.outHeight / (float) 200);
+        if (sampleSize <= 0)
+            sampleSize = 1;
+        options.inSampleSize = sampleSize;
+        scanBitmap = BitmapFactory.decodeFile(path, options);
+        String resultZbar = new DecodeUtils(DecodeUtils.DECODE_DATA_MODE_ALL)
+                .decodeWithZbar(scanBitmap);
+        return resultZbar;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

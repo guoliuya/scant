@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ZBarDecoder">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/ZBarDecoder.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -17,9 +17,6 @@ allprojects {
         maven {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
-//        maven{
-//            url 'http://git.yizhibo.tv/android/mvn-repo/raw/master'
-//        }
     }
 
     // Set encoding
@@ -44,6 +41,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+repositories {
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
