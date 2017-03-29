@@ -36,8 +36,8 @@ public class ImageCropActivity extends Activity {
 	private static final int DEFAULT_ASPECT_RATIO_VALUES = 10;
 
 	private CropImageView cropImageView;
-	private String pre_path; // �????�???��????��??�?�?
-	private boolean pre_flag; // �?�???��?????�?�?
+	private String pre_path;
+	private boolean pre_flag;
 	private int screen_width, screen_height;
 	private TextView tv_ok, tv_canle;
 	private int x;
@@ -110,7 +110,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	screen_height = dm.heightPixels;
 	cropImageView = (CropImageView) findViewById(R.id.CropImageView);
 
-	// ????????��??�???��???????��??
 	Intent preIntent = this.getIntent();
 	pre_path = preIntent.getStringExtra("path");
 	pre_flag = preIntent.getBooleanExtra("flag", true);
@@ -120,7 +119,7 @@ protected void onCreate(Bundle savedInstanceState) {
 		if (pre_path != null) {
 			bitmap = BitmapUtil.getBitmapFromSDCard(pre_path);
 		} else {
-			bitmap = BitmapUtil.temp; // ??��????��??
+			bitmap = BitmapUtil.temp;
 		}
 
 		
@@ -136,7 +135,7 @@ protected void onCreate(Bundle savedInstanceState) {
 		cropImageView.setAspectRatio(DEFAULT_ASPECT_RATIO_VALUES, DEFAULT_ASPECT_RATIO_VALUES);
 
 	} else {
-		cropImageView.setAspectRatio(1, 1);// �?�?�???????尺�??
+		cropImageView.setAspectRatio(1, 1);
 		rl_layout.setVisibility(View.INVISIBLE);
 	}
 	
@@ -151,13 +150,11 @@ public int switchsize() {
 	return size_index;
 }
 
-// ??��??�?�?大�??�???��?�示大�??
 private Bitmap resizeSurfaceWithScreen(Bitmap bitmap, int screen_width, int screen_height) {
 
 	int width = bitmap.getWidth();
 	int height = bitmap.getHeight();
 
-	// �?�?�???�大
 	if (width < screen_width && height < screen_height) {
 		float scale_width = screen_width * 1.0f / width;
 		float scale_height = screen_height * 1.0f / height;
@@ -165,7 +162,6 @@ private Bitmap resizeSurfaceWithScreen(Bitmap bitmap, int screen_width, int scre
 		width *= scale;
 		height *= scale;
 	} else {
-		// �?大�??缩�??
 		if (width > screen_width) {
 			height = height * screen_width / width;
 			width = screen_width;
@@ -243,19 +239,16 @@ public void gotoNextStep() {
 }
 
 /**
- * ???�???��??
- * 
+ *
  * @param angle
  * @param bitmap
  * @return Bitmap
  */
 public Bitmap rotaingImageView(int angle, Bitmap bitmap) {
-	// ???�???��?? ??��??
 	Matrix matrix = new Matrix();
 	;
 	matrix.postRotate(angle);
 	System.out.println("angle2=" + angle);
-	// ???建�?��????��??
 	Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 	return resizedBitmap;
 }
